@@ -4,9 +4,6 @@ def get_fake_reason(row):
     if row['length_flag'] == 1:
         reasons.append("Unnatural length")
 
-    if row['sentiment_flag'] == 1:
-        reasons.append("Sentiment does not match rating")
-
     if row['repetition_flag'] == 1:
         reasons.append("Repetitive hype words")
 

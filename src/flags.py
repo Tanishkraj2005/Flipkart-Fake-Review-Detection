@@ -23,20 +23,37 @@ def repetition_flag(text):
 
 # 4. Generic review rule
 GENERIC_WORDS = [
+    "product was good"
+    "great product",
     "nice product",
-    "worth it",
-    "worth every penny",
     "good product",
+    "very good",
     "awesome",
     "superb",
+    "excellent",
+    "best product",
+    "best",
+    "best price",
+    "worth it",
     "value for money",
     "highly recommend",
-    "best in class"
+    "amazing",
+    "fantastic",
+    "must buy",
+    "good",
+    "super deal",
+    "ok",
+    "nice",
 ]
+
 
 def generic_flag(text):
     t = text.lower()
+    word_count = len(t.split())
+
     for w in GENERIC_WORDS:
-        if w in t:
+        if w in t and word_count <= 6:
             return 1
+
     return 0
+
