@@ -1,58 +1,51 @@
-Flipkart Fake Review Detection
+🛒 Flipkart Fake Review Detection
 
-This project detects potentially fake reviews from a Flipkart dataset using rule-based logic.
-The system cleans review text and applies simple behavioral rules to classify reviews as Likely Fake or Genuine.
+Detecting suspicious product reviews using rule-based NLP techniques.
 
-Dataset:
+This project analyzes Flipkart reviews and flags potentially fake ones based on text patterns such as unnatural length, repetitive hype words, and generic marketing phrases.
 
-Dataset source (not included in this repo due to size ~110MB):
+Why This Project?
 
-https://www.kaggle.com/datasets/niraliivaghani/flipkart-dataset
+Fake reviews reduce customer trust in e-commerce platforms.
+This system applies heuristic-based logic to identify reviews that look suspicious — without using heavy machine learning models.
 
-Please download the dataset manually and place flipkart_reviews.csv inside the data/ folder.
-
-What This Project Does
-
+How It Works
 Cleans review text (removes emojis, special characters, encoding issues)
-Combines review and summary columns
+Merges review + summary
+
 Applies rule-based flags:
+
 Very short or very long reviews
-Excessive repetition or hype punctuation
-Generic marketing phrases (e.g., "nice product", "worth it")
-Classifies reviews based on a scoring system
-If two or more suspicious patterns are found → Likely Fake
-Otherwise → Genuine
+Excessive repetition (e.g., “very very very”)
+Generic marketing phrases
+Assigns a final status:
 
-Project Structure
-data/
-   flipkart_reviews.csv
-   fake_review_output.csv
+Likely Fake
+Genuine
 
-src/
-   clean_text.py
-   flags.py
-   fake_detector.py
-   flag_reason.py
+📂 Dataset
 
-main.py
+Dataset used (not included due to size ~110MB):
 
+🔗 https://www.kaggle.com/datasets/niraliivaghani/flipkart-dataset
 
-How to Run
+Download it manually and place inside the Data/ folder.
 
-Install dependency:
-pip install pandas
+🛠 Tech Stack
 
-
-Download dataset from Kaggle and place it inside data/.
-
-Run:
-python main.py
-
-
-Output will be saved as:
-data/fake_review_output.csv
-
-Tech Used
 Python
 Pandas
 Regular Expressions
+
+▶️ Run Locally
+
+pip install pandas
+python main.py
+
+
+Output will be generated inside:
+Data/fake_review_output.csv
+
+
+
+⭐ If you found this interesting, feel free to explore or extend it.
