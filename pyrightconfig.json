@@ -1,0 +1,9 @@
+{
+    "include": ["."],
+    "pythonVersion": "3.11",
+    "pythonPlatform": "Windows",
+    "extraPaths": [".", "src"],
+    "reportMissingModuleSource": "none",
+    "reportMissingImports": "none",
+    "reportMissingTypeStubs": "none"
+}
