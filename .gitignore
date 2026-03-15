@@ -1,8 +1,6 @@
 Data/flipkart_reviews.csv
 
-# Data/processed_reviews.csv   ← uncomment to exclude from git
-# dashboard_data/powerbi_dataset.csv
-
+dashboard_data/powerbi_dataset.csv
 dashboard_data/*.pbix
 
 

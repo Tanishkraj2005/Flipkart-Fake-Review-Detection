@@ -4,7 +4,7 @@ from src.clean_text import caps_ratio
 from src.flags import (
     length_flag, repetition_flag, generic_flag,
     rating_mismatch_flag, meaningless_flag,
-    duplicate_flag, caps_ratio_flag,
+    duplicate_flag, caps_ratio_flag, short_review_flag,
 )
 
 from src.sentiment import sentiment_score
@@ -54,6 +54,7 @@ def add_rule_flags(df: pd.DataFrame) -> pd.DataFrame:
     df["generic_flag"]         = df["Summary"].apply(generic_flag)
     df["meaningless_flag"]     = df["Summary"].apply(meaningless_flag)
     df["caps_ratio_flag"]      = df["Summary"].apply(caps_ratio_flag)
+    df["short_review_flag"]    = df["Summary"].apply(short_review_flag)
     df["rating_mismatch_flag"] = df.apply(
         lambda row: rating_mismatch_flag(row["Summary"], row["Rate"]),
         axis=1,
@@ -70,6 +71,7 @@ def add_fraud_score(df: pd.DataFrame) -> pd.DataFrame:
         + df["duplicate_flag"]      * 1
         + df["meaningless_flag"]    * 1
         + df["caps_ratio_flag"]     * 1
+        + df["short_review_flag"]   * 1
     )
     return df
 

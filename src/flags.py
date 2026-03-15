@@ -71,3 +71,7 @@ def caps_ratio_flag(text: str, threshold: float = 0.4) -> int:
         return 0
     ratio = sum(1 for c in letters if c.isupper()) / len(letters)
     return 1 if ratio > threshold else 0
+
+def short_review_flag(text: str, min_words: int = 4) -> int:
+    words = [w for w in text.strip().split() if w]
+    return 1 if len(words) <= min_words else 0

@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.clean_text import clean_text
 from src.flags import (
     length_flag, repetition_flag, generic_flag,
-    rating_mismatch_flag, meaningless_flag, caps_ratio_flag,
+    rating_mismatch_flag, meaningless_flag, caps_ratio_flag, short_review_flag,
 )
 from src.sentiment import sentiment_score, sentiment_label
 from src.fake_detector import fake_probability
@@ -165,6 +165,7 @@ with tab2:
                 "Repetition Flag"     : repetition_flag(cleaned),
                 "Generic Phrase Flag" : generic_flag(cleaned),
                 "Meaningless Flag"    : meaningless_flag(cleaned),
+                "Short Review Flag"   : short_review_flag(cleaned),
                 "Rating Mismatch Flag": rating_mismatch_flag(cleaned, rating_input),
                 "Caps Ratio Flag"     : caps_ratio_flag(cleaned),
             }
@@ -177,7 +178,8 @@ with tab2:
             with res_col:
                 st.markdown("#### Verdict")
                 is_meaningless = flags.get("Meaningless Flag", 0) == 1
-                if is_meaningless or score >= 2:
+                is_too_short   = flags.get("Short Review Flag", 0) == 1
+                if is_meaningless or is_too_short or score >= 2:
                     st.error("🚫 **Likely Fake**")
                 elif score == 1:
                     st.warning("⚠️ **Suspicious**")
