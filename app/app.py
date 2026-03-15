@@ -176,12 +176,13 @@ with tab2:
 
             with res_col:
                 st.markdown("#### Verdict")
-                if score == 0:
-                    st.success("✅ **Genuine**")
+                is_meaningless = flags.get("Meaningless Flag", 0) == 1
+                if is_meaningless or score >= 2:
+                    st.error("🚫 **Likely Fake**")
                 elif score == 1:
                     st.warning("⚠️ **Suspicious**")
                 else:
-                    st.error("🚫 **Likely Fake**")
+                    st.success("✅ **Genuine**")
 
                 st.markdown(f"**Fraud Score:** `{score} / 7`")
                 st.progress(prob)
