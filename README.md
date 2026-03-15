@@ -3,12 +3,19 @@
 <div align="center">
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://flipkart-fake-review-detection-08.streamlit.app/)
 [![Power BI](https://img.shields.io/badge/Power%20BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com)
 [![pandas](https://img.shields.io/badge/pandas-2.0%2B-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
 
 **An end-to-end analytics pipeline that detects fake Flipkart product reviews using rule-based fraud signals, NLP sentiment analysis, and a Logistic Regression model — across 363,000+ real reviews.**
+
+---
+
+### 🔗 Quick Links
+- **🌐 [Live Streamlit App](https://flipkart-fake-review-detection-08.streamlit.app/)** — Test the real-time review analyzer yourself
+- **📊 [Power BI Dashboard](https://app.powerbi.com/groups/me/reports/bd7903d9-a010-4c77-a7e9-93631bb3abdd/c6451f46491c018d3ad2?experience=power-bi)** — Explore the business intelligence report
+- **🗄️ [Raw Dataset (Kaggle)](https://www.kaggle.com/datasets/niraliivaghani/flipkart-dataset)** — Download the original 363K reviews
 
 </div>
 
@@ -183,6 +190,8 @@ A **Logistic Regression** model is also trained on `review_length`, `word_count`
 ---
 
 ## 🌐 Streamlit App
+
+🔗 **[View Live Streamlit Web App](https://flipkart-fake-review-detection-08.streamlit.app/)**
 
 Four-tab interactive interface:
 
