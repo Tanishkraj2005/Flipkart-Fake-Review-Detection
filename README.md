@@ -8,7 +8,7 @@
 [![pandas](https://img.shields.io/badge/pandas-2.0%2B-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
 
-**An end-to-end analytics pipeline that detects fake Flipkart product reviews using rule-based fraud signals, NLP sentiment analysis, and a Logistic Regression model — across 363,000+ real reviews.**
+**An end-to-end analytics pipeline that detects fake Flipkart product reviews using rule-based fraud signals, NLP feature engineering (Lexical Diversity, TF-IDF Vectorization), and a Random Forest Classifier — across 363,000+ real reviews.**
 
 ---
 
@@ -23,7 +23,7 @@
 
 ## 📌 Overview
 
-Fake and bot-generated reviews mislead buyers and distort product rankings. This project builds a fully automated, **explainable** fraud detection system that processes **363,000+ raw Flipkart reviews** and classifies each one as `Genuine` or `Likely Fake` using 7 independent fraud signals, NLP sentiment scoring, and a machine learning model.
+Fake and bot-generated reviews mislead buyers and distort product rankings. This project builds a fully automated, **explainable** fraud detection system that processes **363,000+ raw Flipkart reviews** and classifies each one as `Genuine` or `Likely Fake` using 7 independent fraud signals, advanced NLP feature engineering (including **Lexical Diversity** and **TF-IDF Vectorization**), and a **Random Forest Classifier** ensemble model.
 
 All outputs are exported to a **Streamlit app** for live analysis and a **Power BI dashboard** for business-level reporting.
 
@@ -106,8 +106,8 @@ Builds a product-level fraud profile by aggregating review data.
 - **`build_reviewer_profile(df)`** — groups by `Product_name` and computes `total_reviews`, `fake_review_count`, `fake_review_pct`, `avg_fraud_score`, `avg_sentiment`, and `avg_rating` per product. Results are sorted by fake percentage — the worst offenders appear first.
 
 ### `ml_model.py`
-Trains and evaluates a machine learning model to cross-validate rule-based labels.
-- **`run_ml_model(df)`** — trains a **Logistic Regression** model on `review_length`, `word_count`, `caps_ratio`, and `sentiment_score` with an 80/20 train-test split. Prints accuracy, confusion matrix, classification report, and feature importance. Adds `ml_prediction` to the dataset.
+Trains and evaluates an advanced ML pipeline to cross-validate rule-based labels.
+- **`run_ml_model(df)`** — builds a full `scikit-learn` **Pipeline** that uses a `ColumnTransformer` to simultaneously process numerical features (`review_length`, `word_count`, `lexical_diversity`, `caps_ratio`, `sentiment_score`) and convert the raw review text into a **500-feature TF-IDF matrix**. A **Random Forest Classifier** (100 trees, depth-15) is trained on the combined feature set with an 80/20 split. Prints accuracy, confusion matrix, and classification report. Adds `ml_prediction` to the dataset.
 
 ---
 
@@ -169,7 +169,7 @@ fraud_score = sum of all 7 flags    (range: 0 – 7)
 ≥ 2   →  🔴 Likely Fake
 ```
 
-A **Logistic Regression** model is also trained on `review_length`, `word_count`, `caps_ratio`, and `sentiment_score` to produce an independent `ml_prediction` for cross-validation.
+A **Random Forest Classifier** is also trained using a full `scikit-learn` Pipeline. It combines a **TF-IDF Vectorizer** (500 features from raw text) with numerical NLP features like `lexical_diversity`, `caps_ratio`, and `sentiment_score` via a `ColumnTransformer`. This produces an independent `ml_prediction` for cross-validation against the rule-based labels.
 
 ---
 
@@ -180,6 +180,7 @@ A **Logistic Regression** model is also trained on `review_length`, `word_count`
 | `Product_name`, `Rate`, `Price` | cleaned product metadata |
 | `Review`, `Summary` | cleaned text fields |
 | `review_length`, `word_count`, `caps_ratio`, `avg_word_length` | text features |
+| `lexical_diversity` | ratio of unique words to total words (bot detection signal) |
 | `sentiment_score`, `sentiment_label` | TextBlob polarity (−1.0 to +1.0) |
 | `length_flag` … `caps_ratio_flag` | 7 binary fraud signals |
 | `exact_duplicate` | True if summary seen 2+ times |
@@ -228,7 +229,8 @@ The `.pbix` file is in `dashboard_data/` — open it in Power BI Desktop or view
 |------|------|
 | Python 3.10+, pandas | Data pipeline & processing |
 | TextBlob, NLTK | NLP & sentiment scoring |
-| scikit-learn | Logistic Regression model |
+| scikit-learn | Random Forest + TF-IDF Pipeline |
+| scikit-learn ColumnTransformer | Hybrid text + numeric feature fusion |
 | matplotlib, seaborn | EDA visualisations |
 | Streamlit | Interactive web app |
 | Power BI | Business dashboard |
