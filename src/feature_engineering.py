@@ -25,6 +25,9 @@ def add_basic_features(df: pd.DataFrame) -> pd.DataFrame:
             if x.split() else 0
         )
     )
+    df["lexical_diversity"] = df["Summary"].apply(
+        lambda x: len(set(x.split())) / len(x.split()) if x.split() else 0
+    )
     df["exclamation_count"] = df["Summary"].apply(lambda x: x.count("!"))
 
     return df

@@ -274,8 +274,8 @@ with tab4:
 
         st.markdown(f"**{len(fdf):,} reviews** match your filters:")
         show_cols = [c for c in [
-            "fake_status", "fraud_score", "Rate", "Summary",
-            "sentiment_score", "sentiment_label", "exact_duplicate", "Product_name"
+            "fake_status", "ml_prediction", "fraud_score", "Rate", "Summary",
+            "sentiment_score", "lexical_diversity", "sentiment_label", "exact_duplicate", "Product_name"
         ] if c in fdf.columns]
 
         st.dataframe(fdf[show_cols].reset_index(drop=True),
